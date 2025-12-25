@@ -1,0 +1,181 @@
+# motive: could be final sentence? Needs more primary motivation information—"this person's primary motive was: ___"
+# Audun et al. asked: immorality is curiosity-piqueing but some immoral acts are not... what are the boundary conditions. Extremity? Doesn't appear to be the case, could be categorical like dividing on sexual or purity violations (disgust, not just danger or sadness)
+# We want to have a balanced version on the good side for disgust (e.g., molestation, sexual assault)—don't want to artificially deflate curiosity about them
+
+
+# Should match number of people victimized vs. saved (outcome)
+# Structure should be 
+
+# Instructions, we tell people morally good vs. morally bad. We're essentially valence coding these cards.
+# Cards that are red and blue, red indicated that person did something bad (counterbalance color)—making sure people understand the manipulation
+# Aim for like 50 cards for norming, select stimuli that work
+
+
+# there are many explanations for bad that are necessary, not always the case for good
+
+# Next week: aim to have all stimuli—say, 50 good, 50 bad—ready for norming
+# typicality, blame/praise, outcome (how many people affected), valence (neg/pos), familiarity, world-building??
+# 30 people per stimulus
+# 25 stimuli per condition (good vs. bad): 50 stimuli total
+# figure out how long a trial takes
+# put into spreadsheet
+
+good:
+    Hugh Thompson Jr.:
+        intro:
+            was a United States Army helicopter pilot during the Vietnam War who intervened to stop the Mỹ Lai Massacre, in which American soldiers killed hundreds of unarmed Vietnamese civilians.
+        description:
+            Thompson landed his helicopter between the soldiers and the villagers, ordering his crew to open fire on any Americans who continued the massacre.
+            He then helped evacuate survivors from the village and reported the incident to his superiors, leading to an official investigation.
+            Thompson later testified against several soldiers involved in the massacre, demonstrating his commitment to justice and human rights.
+    
+    Irena Sendler:
+        intro:
+            was a Polish social worker and humanitarian who served in the Polish Underground during World War II and saved approximately 2,500 Jewish children from the Warsaw Ghetto.
+        description:
+            Sendler obtained false identity documents for the children and smuggled them out of the ghetto, often hiding them in coffins or toolboxes.
+            She provided the children with new identities and placed them with non-Jewish families, orphanages, and convents to ensure their safety.
+            Surviving torture and imprisonment by the Gestapo, Sendler never revealed the identities of the children she had saved.
+
+    Ho Feng-Shan:
+        intro:
+            was a Chinese diplomat who served as the Chinese Consul-General in Vienna, Austria, and saved thousands of Jewish refugees during the Holocaust.
+        description:
+            Ho issued thousands of visas to Jewish refugees, allowing them to escape Nazi persecution and emigrate to Shanghai.
+            Despite orders from his superiors to stop issuing visas, Ho continued his efforts, often at great personal risk.
+            His actions are credited with saving the lives of an estimated 3,000 Jewish refugees, and he been recognized as Righteous Among the Nations.
+
+    Abdul Sattar Edhi:
+        intro:
+            was a Pakistani philanthropist, social activist, and humanitarian who founded the Edhi Foundation, which runs the world's largest volunteer ambulance network.
+        description:
+            Edhi established a network of ambulances, orphanages, shelters for the homeless, and clinics that offer free medical care to those in need.
+            He dedicated his life to helping the poor and marginalized, often living modestly himself to ensure that more resources could be directed toward his charitable work.
+            He is known amongst Pakistanis as the "Angel of Mercy" and is considered to be Pakistan's most respected and legendary figure.
+
+    Fe del Mundo:
+        intro:
+            was a Filipino pediatrician and the first woman admitted to Harvard Medical School, known for her pioneering work in pediatrics and child healthcare in the Philippines.
+        description:
+            Del Mundo established the first pediatric hospital in the Philippines, the Children's Medical Center, which provided specialized care for children.
+            She developed innovative treatments for childhood diseases and advocated for improved healthcare access for underserved communities.
+            Del Mundo was recognized as the First National Scientist of the Philippines for her contributions to medicine and public health.
+
+    Vasily Arkhipov:
+        intro:
+            was a Soviet Navy officer credited with preventing nuclear armageddon during the Cuban Missile Crisis by refusing to authorize the launch of a nuclear torpedo.
+        description:
+            During a tense standoff with U.S. naval forces, Arkhipov was the second-in-command on a Soviet submarine that was being depth-charged by American ships.
+            Despite pressure from his captain to launch the torpedo, Arkhipov insisted on following protocol, which required unanimous consent from all three senior officers on board.
+            His decision to veto the launch is widely believed to have averted a potential nuclear conflict between the United States and the Soviet Union.
+
+    Matthew Meselson:
+        intro:
+            is an American molecular biologist and geneticist known for his work in the field of chemical and biological weapons disarmament.
+        description:
+            Meselson played a key role in the negotiation of the Biological Weapons Convention, which prohibits the development, production, and stockpiling of biological weapons.
+            He conducted extensive research on the effects of chemical and biological agents, providing scientific evidence to support disarmament efforts.
+            Meselson has been a vocal advocate for arms control and has worked to raise awareness about the dangers of biological warfare.
+
+    Tom Catena:
+        intro:
+            is an American physician and humanitarian who has served as the only permanent doctor in the Nuba Mountains of Sudan, providing medical care to a war-torn and underserved population.
+        description:
+            Catena established the Mother of Mercy Hospital in the Nuba Mountains, which serves thousands of patients annually despite limited resources and ongoing conflict in the region.
+            He has treated victims of war, malnutrition, and disease, often working under dangerous conditions to provide essential healthcare services.
+            Catena's dedication to his patients and his commitment to humanitarian principles have earned him international recognition, including the Aurora Prize for Awakening Humanity.
+    
+    Albertina Sisulu:
+        intro:
+            was a political activist, nurse and community activist, and also one of the high-profile leaders of anti-apartheid resistance in South Africa.
+        description:
+            Sisulu was a founding member of the Federation of South African Women
+            In South Africa, where she was affectionately known as Ma Sisulu, she is often called a mother of the nation.
+
+    Catherine Hamlin:
+        intro:
+            was an Australian obstetrician and gynecologist who co-founded the Addis Ababa Fistula Hospital in Ethiopia, providing free treatment for women suffering from obstetric fistulas.
+        description:
+            Hamlin co-founded, with her husband, the Addis Ababa Fistula Hospital, the world's only medical centre dedicated exclusively to providing free obstetric fistula repair surgery to poor women with childbirth injuries.
+            Hamlin was recognised by the United Nations agency UNFPA as a pioneer in fistula surgery for her development of techniques and procedures for obstetric fistula treatment.
+            The Hamlins, together with the hospital staff, treated more than 60,000 women for obstetric fistula.
+    
+bad:
+    Rosemary West: 
+        intro:
+            is an English serial killer who engaged in the sadistic torture and murder of at least ten young women and also murdered her eight-year-old stepdaughter.
+        description:
+            As a teenager, West would creep into her younger brothers' bedrooms at night and molest them.
+            West and her husband, Fred, committed numerous sexually-motivated murders which included dismemberment of victims, abductions, abuse, and rape spanning several decades.
+            Survivors of sexual assaults at the Wests' hands each testified at Rose's trial that she had been by far the more calculating, aggressive and controlling of the two.
+            
+    Silvia Meraz:
+        intro:
+            was a Mexican cult leader who was convicted of three ritual murders which took place between 2009 and 2012.
+        description:
+            In her first murder, Meraz made an offering of the victim's blood in order to obtain protection on the part of a pagan deity, and later burned and buried the decapitated corpse. 
+            In her subsequent two murders, Meraz held two 10-year-old relatives in front of an altar while one of her daughters slaughtered them.
+            A statement by prosecutors indicated that three children of the ages of five, two and one years old were involved in some way, in the very least witnessing the murders.
+
+    Magdalena Solís: 
+        intro: "known as The High Priestess of Blood, allegedly was a Mexican serial killer and cult leader responsible for orchestrating several murders which involved the drinking of the victims' blood. 
+        description:
+            Solís' violence and brutality gradually escalated; bored with simple orgies, she demanded human sacrifices and devised a "blood ritual."
+            All members of the cult brutally beat, burned, cut and mutilated their victim, before leaving them to bleed to death. 
+            They then deposited the blood in a chalice, mixed with chicken blood and narcotics, and drank it as part of the ritual before ripping the victim's heart out.
+
+    Pauline Nyiramasuhuko:
+        intro:
+            was a Rwandan politician who incited troops and militia to carry out mass killings and rape during the Rwandan genocide of 1994.
+        description:
+            Nyiramasuhuko orchestated a trap at a Red Cross humanitarian aid center where refugees were raped, tortured, killed, and their bodies were burned.
+            Nyiramasuhuko allegedly told militiamen, "before you kill the women, you need to rape them."
+            In another incident, she ordered her men to take cans of gasoline from her car and use them to burn a group of women to death, leaving a single surviving rape victim as a witness.
+    
+    Griselda Blanco: 
+        intro: 
+            was a Colombian drug lord who was prominent in the cocaine-based drug trade and underworld of Miami from the 1970s through the 2000s.
+        description: 
+            Blanco was known for her ruthlessness and for ordering the murders of numerous rivals and associates, including her second and third husbands.
+            She was implicated in at least 200 murders during her reign as the "Cocaine Godmother."
+            According to some accounts, at age 11 she helped kidnap a boy, and, after his wealthy family refused to pay the ransom, she fatally shot him.
+
+    Hermine Braunsteiner: 
+        intro:
+            was an Austrian SS guard at the Ravensbrück and Majdanek concentration camps during World War II known for her exceptional cruelty toward prisoners.
+        description:
+            She killed women and the elderly by stomping on them with her steel-studded jackboots, earning her the nickname "The Stomping Mare."
+            Upon discovering a prisoner had concealed his child inside a backpack, Braunsteiner whipped the child for several minutes before personally dragging her to the gas chamber.
+            Braunsteiner was convicted for her complicity and collaborating in murders of over 1,000 people during the Holocaust.
+    
+    Georgia Tann: 
+        intro:
+            was an American child trafficker who used the Tennessee Children's Home Society adoption agency as a front for a black-market baby-selling operation.
+        description:
+            Through pressure tactics and threats of legal action, Tann would steal children from mostly poor, single mothers to exploit them for profit.
+            While in her care, the children were mistreated by Tann, with reports of neglect, physical abuse, sexual abuse, and murder.
+            She kidnapped and sold an estimated 5,000 young children to wealthy families, at least 19 of whom are documented to have died from abuse.
+
+    Hissène Habré:
+        intro:
+            was a Chadian politician and convicted war criminal who served as the fifth president of Chad from 1982 until he was deposed in 1990.
+        description:
+            Habré was found guilty of human-rights abuses, including rape, sexual slavery, and ordering the killing of 40,000 people.
+            He authorized tens of thousands of political murders and physical torture as well as massacres against ethnic groups.
+            Habre would personally sign death warrants and oversee torture sessions, and was accused of personally participating in torture and rape.
+
+    Marcel Petiot:
+        intro:
+            was a French medical doctor who set up a fake escape network to South America for Jews wanted by the Gestapo during WWII to murder them for lucrative profit.
+        description:
+            Under the name “Dr. Eugène, he murdered 26 people by injecting them with cyanide offered as mandatory vaccinations and then stole their valuables and disposed of their bodies, frequently by burning them.
+            Before the war, he had already gained a reputation for dubious medical practices, such as supplying narcotics and performing illegal abortions, as well as for petty theft.
+
+    Klaus Barbie:
+        intro:
+            was a Nazi German officer in Vichy France during WWII who became known as the "Butcher of Lyon" for his brutal, personal torture and execution of resistance members.
+        description:
+            The daughter of a French Resistance leader said her father was beaten and his skin torn, and that his head was immersed in buckets of ammonia and cold water; 
+            he could not sit or stand and died three days later from burns to his skin.
+            Other tortures included training German shepherd dogs to bite and using them to rape naked women.
+            In April 1944, Barbie ordered the deportation to Auschwitz of a group of 44 Jewish children from an orphanage.

@@ -1,0 +1,14 @@
+{
+    "good" : {
+        "Abdul Sattar Edhi": {
+            "intro": "Abdul Sattar Edhi was a Pakistani humanitarian who founded the Edhi Foundation, which operates the world's largest volunteer ambulance network.",
+            "content": "Starting with a single van, his organization grew to provide free medical care, orphanages, and nursing homes that have saved and supported over 1 million people, including over 25,000 abandoned infants placed in his \"Jhoolas\" or cradles. Edhi was motivated by a philosophy of \"humanitarianism above religion\" and a simple, ascetic lifestyle dedicated entirely to the service of the poor such that his dying wish was to have his organs transplanted to those in need."
+        }
+    },
+    "bad" : {
+        "Rosemary West": {
+            "intro": "Rosemary West is a British serial killer who, along with her husband Fred West, perpetrated a series of sadistic sexual assaults and murders in Gloucester.",
+            "content": "She was convicted of the torture and murder of 10 young women and girls, including her own daughter and stepdaughter, whose remains were discovered buried beneath the family home. West was motivated by a shared pathological sexual sadism and a complete lack of empathy, undisputedly taking the lead role in the predatory entrapment of her victims."
+        }
+    }
+}
