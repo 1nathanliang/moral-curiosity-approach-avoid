@@ -7,26 +7,6 @@ dom.watch();
 
 var jsPsychApproachAvoidTaskPlugin = (function() {
 
-  Object.keys(stimuli.bad).forEach(name => {
-    const value = stimuli.bad[name];
-
-    if (Array.isArray(value)) {
-      stimuli.bad[name] = value.join(' ');
-    }
-  });
-
-  Object.keys(stimuli.good).forEach(name => {
-    const value = stimuli.good[name];
-
-    if (Array.isArray(value)) {
-      stimuli.good[name] = value.join(' ');
-    }
-  });
-
-
-
-  const parsed = JSON.parse(JSON.stringify(stimuli));
-  console.log(parsed);
   // --- STIMULUS DATA (External JSON import) ---
   // const morallyBadStimuli = stimuli['bad']
   // morallyBadStimuli = parsed.map(item => item.description);

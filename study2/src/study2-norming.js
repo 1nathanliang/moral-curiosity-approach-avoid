@@ -208,13 +208,14 @@ const consentForm = {
 const instructions = {
   type: jsPsychInstructions,
   pages: [
-    `<div style="text-align: center;">
+    `<div style="text-align: center; width: 75%; display: flexl; flex-direction: column; align-items: center; margin: 0 auto;">
       <h2>Study Instructions</h2>
       <p style="text-align: center;">Welcome! Thank you for agreeing to participate.</p> 
-      <p>In this study, we are interested in understanding how you think and feel about some <strong>real people</strong> from recent history.
-       You will be asked to provide 
-       You will only get one opportunity to select one person to learn about, so make sure you choose the one who is most interesting to you!</p>
-     </div>`
+      <p style="text-align: center;">In this study, we are interested in understanding how you think and feel about some <strong>real people</strong> from recent history.
+       You will be provided with 20 brief descriptions of these different individuals, along with a brief introduction to each person.</p>
+      <p style="text-align: center;">After reading about each person, you will be asked to answer some questions about your perceptions of them. Please read each description and question carefully, and answer as honestly as possible.</p>
+      <p style="text-align: center;">When you are ready to begin, please click the "Next" button below.</p>
+     </div>`,
   ],
   show_clickable_nav: true
 };
@@ -222,13 +223,52 @@ const instructions = {
 // Build Timeline
 timeline.push(instructions);
 
+var trial = {
+  type: jsPsychApproachAvoidTaskPlugin,
+  trial_duration_seconds: 1,
+  num_cards: 16,
+  prompt_text: "Would you like to read more?",
+  continue_button_text: ["Yes", "No"]
+};
+
+// timeline.push(trial)
+
 // ---------------- PAGE 4 ---------------- //
-const mainTaskStimuli = [
-  { prompt: "Stimulus 1: How often do you watch Sci-Fi?", name: "stim_1" },
-  { prompt: "Stimulus 2: How often do you read Mystery?", name: "stim_2" },
-  { prompt: "Stimulus 3: How often do you play Games?", name: "stim_3" },
-  // ... add up to 20 items here
-];
+const mainTaskStimuli = Object.entries(stimuli).map(([name, details]) => ({
+  name: name,
+  morality: details.morality,
+  intro: details.intro, 
+  description: details.description,
+  motive: details.motive
+}));
+
+
+// Assuming mainTaskStimuli is your flattened array from the previous step
+const moralPool = mainTaskStimuli.filter(s => s.morality === 'moral');
+const immoralPool = mainTaskStimuli.filter(s => s.morality === 'immoral');
+
+/**
+ * Assigns a group ID (0-4) to determine the stimuli slice.
+ * Ideally, this comes from a database or a URL parameter like ?group=0
+ */
+const groupID = Math.floor(Math.random() * 5); 
+
+function getSlice(pool, group) {
+    // Each group starts at a specific index and takes 10 items
+    // Using modulo (%) allows the selection to "wrap around" the 25-item array
+    let selected = [];
+    for (let i = 0; i < 10; i++) {
+        let index = (group * 5 + i) % pool.length;
+        selected.push(pool[index]);
+    }
+    return selected;
+}
+
+const selectedMoral = getSlice(moralPool, groupID);
+const selectedImmoral = getSlice(immoralPool, groupID);
+
+// Combine and shuffle for the individual participant
+const participantStimuli = jsPsych.randomization.shuffle([...selectedMoral, ...selectedImmoral]);
 
 const taskTrial = {
   type: jsPsychSurveyHtmlForm,
@@ -237,12 +277,14 @@ const taskTrial = {
     {
       // Use timelineVariable to inject the unique prompt and name
       name: "morality",
-      prompt: "How morally good or morally bad do you consider this person to be?",
+      prompt: "How <strong>morally good or morally bad</strong> do you consider this person to be?",
       format: 'slider',
+      background: "minimal",
+      direction: "bipolar",
       anchors: 
         {
           left: 'Extremely morally bad', 
-          center: '', 
+          center: 'Neutral',
           right: 'Extremely morally good'
         }
       ,
@@ -250,14 +292,61 @@ const taskTrial = {
       range: [0, 100],
     },
     {
-      name: "morality",
-      prompt: "How morally good or morally bad do you consider this person to be?",
+      name: "familiarity",
+      prompt: "How <strong>familiar</strong> are you with this person?",
       format: 'slider',
+      background: "minimal",
+      direction: "unipolar",
       anchors: 
         {
-          left: 'Extremely morally bad', 
-          center: '', 
-          right: 'Extremely morally good'
+          left: 'Extremely unfamiliar',
+          right: 'Extremely familiar'
+        }
+      ,
+      starting_value: 0,
+      range: [0, 100],
+    },
+    {
+      name: "uncertainty",
+      prompt: "How <strong>certain</strong> are you about what you will read next about this person?",
+      format: 'slider',
+      background: "minimal",
+      direction: "unipolar",
+      anchors: 
+        {
+          left: 'Extremely uncertain',
+          right: 'Extremely certain'
+        }
+      ,
+      starting_value: 0,
+      range: [0, 100],
+    },
+    {
+      name: "typicality",
+      prompt: "How <strong>typical</strong> do you consider this person to be?",
+      format: 'slider',
+      background: "minimal",
+      direction: "unipolar",
+      anchors: 
+        {
+          left: 'Extremely atypical',
+          right: 'Extremely typical'
+        }
+      ,
+      starting_value: 0,
+      range: [0, 100],
+    },
+    {
+      name: "valence",
+      prompt: "How <strong>positively or negatively</strong> do you feel about this person?",
+      format: 'slider',
+      background: "minimal",
+      direction: "bipolar",
+      anchors: 
+        {
+          left: 'Extremely negative', 
+          center: 'Neutral',
+          right: 'Extremely positive'
         }
       ,
       starting_value: 50,
@@ -272,7 +361,21 @@ const taskTrial = {
 
 const taskProcedure = {
   timeline: [taskTrial],
-  timeline_variables: mainTaskStimuli,
+  timeline_variables: participantStimuli.map(stimulus => ({
+    prompt: `
+      <p>Please read about the person below and answer the following questions:</p>
+      <div class="norming-card aat-card active ${stimulus.morality === 'moral' ? 'norming-card-moral' : 'norming-card-immoral'}">
+        <div style="padding: 0 20px 0;">  
+          <h2><strong>${stimulus.name}</strong></h2>
+          <p>${stimulus.intro}</p>
+        </div>
+        <div class="faded-text">
+          <p>${stimulus.description}</p>
+          <p>${stimulus.motive}</p>
+        </div>
+      </div>`,
+    name: stimulus.name
+  })),
   randomize_order: true
 };
 
@@ -288,7 +391,7 @@ const fictionQuestion = {
   questions: [
     {
       background: true,
-      prompt: "How much popular fiction (TV shows, movies, books, etc.) do you consume?",
+      prompt: "How much <strong>popular fiction (TV shows, movies, books, etc.)</strong> do you consume?",
       name: 'fiction_consumption',
       format: 'radio',
       orientation: 'horizontal',
@@ -429,13 +532,13 @@ const politicsQuestions = {
       name: 'attention',
       format: 'radio',
       options: [
-        "1<br>(Not at all)",
+        "1<br>Not at all",
         "2",
         "3",
         "4",
         "5",
         "6",
-        "7<br>(Completely)"
+        "7<br>Completely"
       ],
       write_in: [],
       selection: 'multiple',

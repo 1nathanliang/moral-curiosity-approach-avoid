@@ -54,8 +54,8 @@ a {
   /* align-items: center; */
   text-align: center;
   min-height: 100vh;
-  min-width: 75em;
-  max-width: 100em;
+  min-width: 50em;
+  max-width: 75em;
   line-height: 1.5;
 }
 
@@ -92,36 +92,6 @@ a {
   align-content: center;
 }
 
-#sampling-prompt {
-  padding-top: 50px;
-}
-
-#avatar-container {
-  display: flex;
-  justify-self: center;
-}
-
-.avatar-circle {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  background-color: #777;
-  border: 5px solid #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.avatar-photo {
-  width: 125px;
-  height: 125px;
-}
-
-#statement {
-  justify-self: start;
-  text-align: center;
-  line-height: 1.5;
-}
 
 .fade-in {
   opacity: 0; /* Start with 0 opacity */
@@ -155,13 +125,16 @@ a {
 
 
 /* Multiple Choice */
-.jspsych-survey-multi-choice-question {
-  text-align: left; font-size: 12pt;
+.jspsych-survey-multi-choice-preamble {
+  text-align: left; 
+  font-size: 14pt;
 }
 
-.jspsych-survey-multi-choice-preamble {
-  text-align: left; font-size: 14pt;
+.jspsych-survey-multi-choice-question {
+  text-align: left; 
+  font-size: 12pt;
 }
+
 
 blockquote {
   text-align: left;
@@ -360,11 +333,32 @@ blockquote {
 #aat-experiment-wrapper {
   position: relative;
   /* Define size based on the card size */
-  width: 500px; 
-  height: 350px; /* Adjust height based on your total card height */
+  width: 500px;
 }
 
 /* --- UPDATED: Card Stacking and Initial State --- */
+.norming-card {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  transform: translateY(0%);
+  overflow: hidden;
+  border-radius: 10px;
+  border: rgba(0, 0, 0, 0.1) 2px solid;
+  margin-bottom: 20px;
+  padding: 25px;
+  width: 500px;
+}
+
+.norming-card-moral {
+  box-shadow: 0px 0px 12px rgb(13, 110, 237);
+}
+
+.norming-card-immoral {
+  box-shadow: 0px 0px 12px rgb(224, 18, 18);
+}
+
 .aat-parent-container {
   display: flex;
   justify-content: center;
@@ -418,7 +412,7 @@ blockquote {
 /* --- NEW: Entrance Animation for the "next" card --- */
 /* This happens when the card becomes .active */
 .aat-parent-container.next-in {
-  /* Initial state just before it beco mes 'active' */
+  /* Initial state just before it becomes 'active' */
   opacity: 0;
   z-index: 99;
   transform: scale(0.95) translateY(10px); /* Slightly smaller/lower, like it's in the deck */
@@ -431,6 +425,7 @@ blockquote {
 
 .aat-stimulus-container {
   display: flex;
+  flex-direction: column;
   padding: 50px;
 }
 
@@ -505,12 +500,23 @@ blockquote {
 
 .faded-text {
   /* Apply a gradient mask to fade out the bottom */
-  padding: 10px;
-  -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 35%);
-  mask-image: linear-gradient(to bottom, black 0%, transparent 75%);
-  /* Optional: Add a slight blur */
+  padding: 0 20px 0;
+    -webkit-mask-image: linear-gradient(
+    to bottom,
+    black 5%,
+    black 15%,              /* readable zone */
+    rgba(0,0,0,0.15) 40%,   /* steep drop */
+    rgba(0,0,0,0.05) 95%  /* almost invisible, but present */
+  );
+
+  mask-image: linear-gradient(
+    to bottom,
+    black 5%,
+    black 15%,
+    rgba(0,0,0,0.15) 40%,
+    rgba(0,0,0,0.05) 95%
+  );
   filter: blur(2px);
-  transition: filter 0.5s ease; /* For blur effect */
 }
 
 
@@ -543,6 +549,12 @@ blockquote {
   display: block;
   margin-bottom: 12px;
   font-size: 12pt;
+}
+
+.jspsych-survey-html-form-preamble {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Write-in Options */ 
@@ -732,10 +744,17 @@ label.jspsych-survey-html-form-checkbox-option-vertical.selected {
 
 
 
-
-
-
-
+#jspsych-survey-html-form-next {
+  background: #0B6ED0;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 10px 16px;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: #094a9e;
+  }
+}
 /* custom style for input[type="range] (slider) to improve alignment between positions and labels */
 
 
@@ -843,8 +862,6 @@ label.jspsych-survey-html-form-checkbox-option-vertical.selected {
 
 .jspsych-slider-center-anchor {
   text-align: center;
-  /* left: 50%;
-  transform: translateX(-50%); */
 }
 
 .jspsych-slider-right-anchor {
@@ -858,7 +875,15 @@ label.jspsych-survey-html-form-checkbox-option-vertical.selected {
 }
 
 /* jsPsych progress bar */
+.jspsych-display-element {
+  overflow: visible !important;
+}
+
 #jspsych-progressbar-container {
+  position: sticky; /* Nathan Custom */
+  top: 0; /* Specify the distance from the top where it should stick */
+  z-index: 10; /* Optional: to ensure it stays above other content */
+  overflow: hidden;
   color: #555;
   border-bottom: 1px solid #dedede;
   background-color: #f9f9f9;
@@ -867,9 +892,7 @@ label.jspsych-survey-html-form-checkbox-option-vertical.selected {
   padding: 8px 0px;
   width: 100%;
   line-height: 1em;
-  position: sticky; /* Nathan Custom */
-  top: 0; /* Specify the distance from the top where it should stick */
-  z-index: 10; /* Optional: to ensure it stays above other content */
+  align-self: flex-start;
 }
 
 #jspsych-progressbar-container span {

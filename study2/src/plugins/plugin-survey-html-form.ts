@@ -123,9 +123,10 @@ class SurveyHtmlFormPlugin implements JsPsychPlugin<Info> {
         var slider_prompt = question.prompt;
         var slider_name = question.name;
         var slider_id = question_id;
-        var slider_anchors = question.anchors;
+        var slider_anchors = question.anchors
         var slider_starting_value = question.starting_value;
         var slider_seq = question.range;
+        var slider_direction = question.direction || 'bipolar';
         html += `
           <label class="jspsych-survey-html-form-prompt" for="jspsych-survey-html-form-response-${slider_id}">${slider_prompt}</label>
           <input 
@@ -136,7 +137,7 @@ class SurveyHtmlFormPlugin implements JsPsychPlugin<Info> {
             value="${slider_starting_value}" min="${slider_seq[0]}" max="${slider_seq[1]}" step="${slider_seq[2] || 1}" 
             onmousedown="
               this.classList.remove('incomplete');
-              this.classList.add('bipolar-clicked');
+              this.classList.add('${slider_direction}-clicked');
               document.getElementById('jspsych-survey-html-form-response-${slider_id}')
             "
           >
@@ -145,7 +146,7 @@ class SurveyHtmlFormPlugin implements JsPsychPlugin<Info> {
                 ${slider_anchors['left']}
               </span>
               <span class="jspsych-slider-center-anchor">
-                ${slider_anchors['center']}
+                ${slider_anchors['center'] || ''}
               </span>
               <span class="jspsych-slider-right-anchor">
                 ${slider_anchors['right']}
