@@ -267,7 +267,7 @@ blockquote {
 
 
 
-.popup {
+#jspsych-confirm-popup {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -282,19 +282,16 @@ blockquote {
   opacity: 1;
 }
 
-.popup h2 {
-  margin-top: 0;
-}
 
-.popup p {
+#jspsych-confirm-popup p {
   margin-bottom: 20px;
 }
 
-.popup button {
+#jspsych-confirm-popup button {
   margin-right: 10px;
 }
 
-#overlay {
+#jspsych-survey-overlay {
   position: fixed;
   top: 0;
   left: 0;

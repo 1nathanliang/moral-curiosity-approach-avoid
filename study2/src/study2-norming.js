@@ -12,8 +12,8 @@ import stimuli from './stimuli/norming-targets.json' with { type: 'json' }
 import $ from 'jquery';
 import { initJsPsych } from 'jspsych';
 import { library, dom } from '@fortawesome/fontawesome-svg-core'
-import { faEnvelope, faPhone, faArrowUpRightFromSquare, faCircleCheck, faCircleXmark, faChevronCircleRight, faChevronCircleDown, faArrowTurnUp, faArrowRight, faPersonMilitaryPointing } from '@fortawesome/free-solid-svg-icons';
-library.add(faEnvelope, faPhone, faArrowUpRightFromSquare, faCircleCheck, faCircleXmark, faChevronCircleRight, faChevronCircleDown, faArrowTurnUp, faArrowRight);
+import { faEnvelope, faPhone, faArrowUpRightFromSquare, faCircleCheck, faCircleXmark, faChevronCircleRight, faChevronCircleDown, faArrowTurnUp, faArrowRight, faCircleArrowRight, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
+library.add(faEnvelope, faPhone, faArrowUpRightFromSquare, faCircleCheck, faCircleXmark, faChevronCircleRight, faChevronCircleDown, faArrowTurnUp, faArrowRight, faCircleArrowRight, faTriangleExclamation);
 dom.watch();
 
 import 'jspsych/css/jspsych.css';
@@ -290,6 +290,7 @@ const taskTrial = {
       ,
       starting_value: 50,
       range: [0, 100],
+      requirements: 'request'
     },
     {
       name: "familiarity",
@@ -305,6 +306,7 @@ const taskTrial = {
       ,
       starting_value: 0,
       range: [0, 100],
+      requirements: 'request'
     },
     {
       name: "uncertainty",
@@ -320,6 +322,7 @@ const taskTrial = {
       ,
       starting_value: 0,
       range: [0, 100],
+      requirements: 'request'
     },
     {
       name: "typicality",
@@ -335,6 +338,7 @@ const taskTrial = {
       ,
       starting_value: 0,
       range: [0, 100],
+      requirements: 'request'
     },
     {
       name: "valence",
@@ -351,6 +355,7 @@ const taskTrial = {
       ,
       starting_value: 50,
       range: [0, 100],
+      requirements: 'request'
     },
   ],
   button_label: 'Next Page',
@@ -404,8 +409,8 @@ const fictionQuestion = {
         "5",
         "6",
         "7<br>A great deal"
-      ]
-      // requirements: 'request'
+      ],
+      requirements: 'request'
     },
   ],
   button_label: 'Next Page',
@@ -431,7 +436,7 @@ const demographicsQuestions = {
       format: 'number',
       min: 18,
       max: 120,
-      // requirements: 'request'
+      requirements: 'request'
     },
     {
       prompt: "With which gender do you identify?",
@@ -445,8 +450,8 @@ const demographicsQuestions = {
         "Prefer not to disclose"
       ],
       write_in: ["Other:"],
-      // requirements: 'request',
-      orientation: 'vertical'
+      orientation: 'vertical',
+      requirements: 'request'
     },
     {
       prompt: "Where would you place yourself on the political spectrum, overall?",
@@ -461,7 +466,7 @@ const demographicsQuestions = {
       ,
       starting_value: 50,
       range: [0, 100],
-      // requirements: 'request'
+      requirements: 'request'
     },
     {
       prompt: "Please indicate how you identify yourself:",
@@ -479,8 +484,8 @@ const demographicsQuestions = {
       ],
       write_in: [],
       selection: 'multiple',
-      orientation: 'vertical'
-      // requirements: 'request',
+      orientation: 'vertical',
+      requirements: 'request'
     },
     {
       prompt: "To what extent do you consider yourself to be religious?",
@@ -493,8 +498,8 @@ const demographicsQuestions = {
         "Very religious"
       ],
       write_in: [],
-      orientation: 'horizontal'
-      // requirements: 'request'
+      orientation: 'horizontal',
+      requirements: 'request'
     }
   ],
 
