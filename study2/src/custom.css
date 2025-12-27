@@ -551,7 +551,6 @@ blockquote {
 .jspsych-survey-html-form-preamble {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 /* Write-in Options */ 
@@ -741,8 +740,9 @@ label.jspsych-survey-html-form-checkbox-option-vertical.selected {
 
 
 
-#jspsych-survey-html-form-next {
+.jspsych-survey-html-form-next.jspsych-btn {
   background: #0B6ED0;
+  border-radius: 6px;
   color: white;
   border: none;
   cursor: pointer;
@@ -918,4 +918,13 @@ label.jspsych-survey-html-form-checkbox-option-vertical.selected {
 /* Control appearance of jsPsych.data.displayData() */
 #jspsych-data-display {
   text-align: left;
+}
+
+.jspsych-instructions {
+  text-align: center;
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
 }

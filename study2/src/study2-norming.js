@@ -90,7 +90,7 @@ const enterFullscreen = {
   delay_after: 0
 };
 
-// timeline.push(enterFullscreen)
+timeline.push(enterFullscreen)
 
 // ---------------- PAGE 2 ---------------- //
 // CONSENT FORM //
@@ -172,7 +172,7 @@ const consentForm = {
           that serves as a liaison between the University and the person bringing the complaint 
           so that anonymity can be ensured.
       </p>
-      <p style="text-align: left; border-top: 1px solid #ccc; padding-top: 10px; margin-top: 10px;">
+      <p class="indented" style="border-top: 1px solid #ccc; padding-top: 10px; margin-top: 10px;">
         <strong>Statement of consent</strong><br>
         I have read the above information, and have received answers to any questions I asked. 
         I consent to take part in the study. 
@@ -181,7 +181,6 @@ const consentForm = {
     {
       name: 'consent',
       format: 'radio',
-      background: false,
       prompt: '',
       options: ["YES, I consent to participate in this study", "NO, I do not consent to participate in this study"],
       orientation: "vertical"
@@ -190,32 +189,43 @@ const consentForm = {
 
   // If the participant does not consent, end the experiment
   on_finish: function (data) {
-    if (jsPsych.data.get().last(1).values()[0].response.consent == "NO, I do not consent to participate in this study") {
+    if (data.response.consent == "NO, I do not consent to participate in this study") {
+      jsPsych.data.addProperties({
+        consent: "no"
+      });
       jsPsych.abortExperiment(
         `<p class="jspsych-center">
           You did not consent to participate in this study.<br>
           Please return this study in Prolific.
         </p>`
       );
+    } else {
+      jsPsych.data.addProperties({
+        consent: "yes"
+      });
     };
   }
 };
 
-// timeline.push(consentForm);
+timeline.push(consentForm);
 
 // ---------------- PAGE 3 ---------------- //
 // Define Instructions
 const instructions = {
   type: jsPsychInstructions,
   pages: [
-    `<div style="text-align: center; width: 75%; display: flexl; flex-direction: column; align-items: center; margin: 0 auto;">
-      <h2>Study Instructions</h2>
-      <p style="text-align: center;">Welcome! Thank you for agreeing to participate.</p> 
-      <p style="text-align: center;">In this study, we are interested in understanding how you think and feel about some <strong>real people</strong> from recent history.
-       You will be provided with 20 brief descriptions of these different individuals, along with a brief introduction to each person.</p>
-      <p style="text-align: center;">After reading about each person, you will be asked to answer some questions about your perceptions of them. Please read each description and question carefully, and answer as honestly as possible.</p>
-      <p style="text-align: center;">When you are ready to begin, please click the "Next" button below.</p>
-     </div>`,
+    `<main>
+      <div class="jspsych-instructions">
+        <h2>Study Instructions</h2>
+        <p>Welcome! Thank you for agreeing to participate.</p> 
+        <p>
+          In this study, we are interested in understanding how you think and feel about some <strong>real people</strong> from recent history.
+          You will be provided with 20 brief descriptions of these different individuals, along with a brief introduction to each person.
+        </p>
+        <p>After reading about each person, you will be asked to answer some questions about your perceptions of them. Please read each description and question carefully, and answer as honestly as possible.</p>
+        <p>When you are ready to begin, please click the "Next" button below.</p>
+      </div>
+    </main>`,
   ],
   show_clickable_nav: true
 };
@@ -223,15 +233,6 @@ const instructions = {
 // Build Timeline
 timeline.push(instructions);
 
-var trial = {
-  type: jsPsychApproachAvoidTaskPlugin,
-  trial_duration_seconds: 1,
-  num_cards: 16,
-  prompt_text: "Would you like to read more?",
-  continue_button_text: ["Yes", "No"]
-};
-
-// timeline.push(trial)
 
 // ---------------- PAGE 4 ---------------- //
 const mainTaskStimuli = Object.entries(stimuli).map(([name, details]) => ({
@@ -351,8 +352,7 @@ const taskTrial = {
           left: 'Extremely negative', 
           center: 'Neutral',
           right: 'Extremely positive'
-        }
-      ,
+        },
       starting_value: 50,
       range: [0, 100],
       requirements: 'request'
@@ -360,7 +360,7 @@ const taskTrial = {
   ],
   button_label: 'Next Page',
   on_finish: function(data) {
-     // You can still perform logic here
+    console.log(data)
   }
 };
 
@@ -368,8 +368,8 @@ const taskProcedure = {
   timeline: [taskTrial],
   timeline_variables: participantStimuli.map(stimulus => ({
     prompt: `
-      <p>Please read about the person below and answer the following questions:</p>
-      <div class="norming-card aat-card active ${stimulus.morality === 'moral' ? 'norming-card-moral' : 'norming-card-immoral'}">
+    <p>Please read about the person below and answer the following questions:</p>
+    <div class="norming-card aat-card active ${stimulus.morality === 'moral' ? 'norming-card-moral' : 'norming-card-immoral'}">
         <div style="padding: 0 20px 0;">  
           <h2><strong>${stimulus.name}</strong></h2>
           <p>${stimulus.intro}</p>
@@ -395,7 +395,6 @@ const fictionQuestion = {
     </p>`,
   questions: [
     {
-      background: true,
       prompt: "How much <strong>popular fiction (TV shows, movies, books, etc.)</strong> do you consume?",
       name: 'fiction_consumption',
       format: 'radio',
@@ -505,26 +504,20 @@ const demographicsQuestions = {
 
   button_label: 'Next Page',
   on_finish: function(data) {
-    const resp = data.response;
-
-    data.age = Number(resp['age']);
-    data.race_ethnicity_indigenous = resp['race-ethnicity-indigenous'] || '';
-    data.race_ethnicity_asian = resp['race-ethnicity-asian'] || '';
-    data.race_ethnicity_black = resp['race-ethnicity-black'] || '';
-    data.race_ethnicity_native = resp['race-ethnicity-native'] || '';
-    data.race_ethnicity_white = resp['race-ethnicity-white'] || '';
-    data.race_ethnicity_hispanic = resp['race-ethnicity-hispanic'] || '';
-    data.race_ethnicity_other = resp['race-ethnicity-other'] || '';
-    data.race_ethnicity_na = resp['race-ethnicity-prefer-not'] || '';
-
-    data.gender = resp['gender'] || '';
-    data.education = resp['education'] || '';
+    jsPsych.data.addProperties({
+      age: data.response['age'],
+      gender: data.response['gender'],
+      gender_writein: data.response['gender-writein'] || '',
+      politics: data.response['politics'],
+      race_ethnicity: Array.isArray(data.response['race-ethnicity']) ? data.response['race-ethnicity'].join(", ") : data.response['race-ethnicity'],
+      religion: data.response['religion']
+    });
   }
 };
 
 timeline.push(demographicsQuestions);
 
-const politicsQuestions = {
+const attention = {
   type: jsPsychSurveyHtmlForm,
   preamble: null,
   questions: [
@@ -545,23 +538,40 @@ const politicsQuestions = {
         "6",
         "7<br>Completely"
       ],
-      write_in: [],
-      selection: 'multiple',
       requirements: 'request',
       orientation: 'horizontal'
     }
   ],
   request_response: true,
   on_finish: function (data) {
-
-    data.political_ideology_economic = data.response['political-ideology-economic'];
-    data.political_ideology_social = data.response['political-ideology-social'];
-    data.political_ideology_overall = data.response['political-ideology-overall'];
- 
+    switch (data.response['attention']) {
+      case "1<br>Not at all":
+        data.attention_num = 1;
+        break;
+      case "2":
+        data.attention_num = 2;
+        break;
+      case "3":
+        data.attention_num = 3;
+        break;
+      case "4":
+        data.attention_num = 4;
+        break;
+      case "5":
+        data.attention_num = 5;
+        break;
+      case "6":
+        data.attention_num = 6;
+        break;
+      case "7<br>Completely":
+        data.attention_num = 7;
+        break;
+    }
+    data.attention = data.response['attention']; 
   }
 };
 
-timeline.push(politicsQuestions);
+timeline.push(attention);
 
 // Comments
 const feedback = {
@@ -620,7 +630,7 @@ const save_data = {
 
     // --- abortExperiment screen ---
     jsPsych.abortExperiment(`
-      <p class="jspsych-center">
+      <p>
         Thanks for participating! You will be redirected in
         <span id="countdown">5</span> seconds...
       </p>
