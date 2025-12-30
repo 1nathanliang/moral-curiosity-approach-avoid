@@ -18,14 +18,10 @@ dom.watch();
 
 import 'jspsych/css/jspsych.css';
 import './custom.css';
-import jsPsychHtmlKeyboardResponse from '@jspsych/plugin-html-keyboard-response';
+
 import jsPsychFullscreen from '@jspsych/plugin-fullscreen';
 import jsPsychInstructions from '@jspsych/plugin-instructions';
-import jsPsychSurveyMultiChoice from '@jspsych/plugin-survey-multi-choice';
-import jsPsychSurveyHtmlForm from './plugins/plugin-survey-html-form';
-
-import jsPsychSurveyLikert from '@jspsych/plugin-survey-likert';
-import jsPsychSurveyText from '@jspsych/plugin-survey-text';
+import jsPsychSurvey from './plugins/plugin-survey';
 import jsPsychPipe from '@jspsych-contrib/plugin-pipe';
 import { jsPsychApproachAvoidTaskPlugin } from './plugins/plugin-approach-avoid';
 
@@ -59,27 +55,6 @@ jsPsych.data.addProperties({
   // sessionId: sessionId
 });
 
-// Political Ideology
-const politicalResponses = [
-  "1 (Extremely liberal)",
-  "2",
-  "3",
-  "4",
-  "5",
-  "6",
-  "7 (Extremely conservative)",
-];
-
-// attention check
-const attention_scale = [
-  "1 = No, I didnt pay close attention. You should not use my data",
-  "2",
-  "3",
-  "4",
-  "5",
-  "6",
-  "7 = Yes, I paid full attention. You should use my data",
-];
 
 // ---------------- PAGE 1 ---------------- //
 // ENTER FULLSCREEN 
@@ -94,11 +69,11 @@ timeline.push(enterFullscreen)
 
 // ---------------- PAGE 2 ---------------- //
 // CONSENT FORM //
-const consentForm = {
-  type: jsPsychSurveyHtmlForm,
+const blockConsentForm = {
+  type: jsPsychSurvey,
   preamble: `
       <h2 style="text-align: center"><strong>Consent Form</strong></h2>
-      <p>
+      <p class="indented align-left">
         We are asking you to participate in a research study titled "Social Judgment and Decision-Making."
         We will describe this study to you and answer any of your questions. This form has information to help 
         you decide whether or not you wish to participate—please review it carefully. Your participation is voluntary. 
@@ -106,21 +81,21 @@ const consentForm = {
       </p>
 
       <h3><i class="fa fa-2xs fa-chevron-circle-down"></i>&nbsp;<strong>What this study is about</strong></h3>
-      <p class="indented">
+      <p class="indented align-left">
         The purpose of this research is to explore how people view and judge the actions of others. 
         You will not be made aware of the full nature or purpose of the research to maintain validity of the research, 
         but you will be fully debriefed at the end.
       </p>
 
       <h3><i class="fa fa-2xs fa-chevron-circle-down"></i>&nbsp;<strong>What we will ask you to do</strong></h3>
-      <p class="indented">
+      <p class="indented align-left">
         We will ask you to complete a study that takes approximately <strong>7 minutes</strong>. The study will include 
         demographic questions (e.g., age, gender), brief tasks or vignettes, and questions about your thoughts, 
         perceptions, and reactions. In some cases, you may be asked to read short stories or view images before answering questions.
       </p>
 
       <h3><i class="fa fa-2xs fa-chevron-circle-down"></i>&nbsp;<strong>Risks and discomforts</strong></h3>
-      <p class="indented">
+      <p class="indented align-left">
         Participants will be asked questions and encounter stimuli involving moral beliefs, which may be uncomfortable. 
         The images presented will include images from a standardized set, including gross and disgusting things 
         like rotten food and vomit as well as scary things like snakes and spiders. While there are measures put 
@@ -129,21 +104,21 @@ const consentForm = {
       </p>
 
       <h3><i class="fa fa-2xs fa-chevron-circle-down"></i>&nbsp;<strong>Benefits</strong></h3>
-      <p class="indented">
+      <p class="indented align-left">
         It is hoped that this study will contribute to knowledge about how people view and make judgements about others. 
         You are not expected to directly benefit from participation in the study.
       </p>
       <h3><i class="fa fa-2xs fa-chevron-circle-down"></i>&nbsp;<strong>Incentives for participation</strong></h3>
-      <p class="indented">
+      <p class="indented align-left">
         If participating through Prolific/Cloud, you will be paid <strong>$1.05 ($9.00/hour)</strong> for your participation in the study.
       </p>
       <h3><i class="fa fa-2xs fa-chevron-circle-down"></i>&nbsp;<strong>Privacy, confidentiality, and data security</strong></h3>
-      <p class="indented">
+      <p class="indented align-left">
         You will not be asked to provide information that could be used to identify you personally. 
         We anticipate that your participation in this survey presents no greater risk than everyday use of the Internet.<br>
       </p>
       <h3><i class="fa fa-2xs fa-chevron-circle-down"></i>&nbsp;<strong>Sharing de-identified data collected in this research</strong></h3>
-      <p class="indented">
+      <p class="indented align-left">
         De-identified data from this study may be shared with the research community 
         at large to advance science and health. We will remove or code any personal 
         information that could identify you before files are shared with other researchers 
@@ -152,14 +127,14 @@ const consentForm = {
         we cannot guarantee anonymity of your personal data.
       </p>
       <h3><i class="fa fa-2xs fa-chevron-circle-down"></i>&nbsp;<strong>Taking part is voluntary</strong></h3>
-      <p class="indented">
+      <p class="indented align-left">
         Please remember that your participation is voluntary. You may refuse to participate 
         before the study begins, discontinue at any time, or skip any questions/procedures 
         that may make you feel uncomfortable, with no penalty to you, and no effect on the 
         compensation earned before withdrawing.
       </p>
       <h3><i class="fa fa-2xs fa-chevron-circle-down"></i>&nbsp;<strong>If you have questions</strong></h3>
-      <p class="indented">
+      <p class="indented align-left">
         The main researcher conducting this study is Jordan Wylie, a professor at Cornell University. 
         Please ask any questions you have now. If you have questions later, you may contact Professor 
         Jordan Wylie <a href="mailto:jordan.wylie@cornell.edu"><i class="fa-solid fa-envelope fa-xs"></i>&nbsp;jordan.wylie@cornell.edu</a>&nbsp;or <a href="tel:16072554486"><i class="fa-solid fa-phone fa-xs"></i>&nbsp;+1&nbsp;(607)&nbsp;255-4486</a>. If you have any questions or concerns regarding 
@@ -172,7 +147,7 @@ const consentForm = {
           that serves as a liaison between the University and the person bringing the complaint 
           so that anonymity can be ensured.
       </p>
-      <p class="indented" style="border-top: 1px solid #ccc; padding-top: 10px; margin-top: 10px;">
+      <p class="indented align-left" style="border-top: 1px solid #ccc; padding-top: 10px; margin-top: 10px;">
         <strong>Statement of consent</strong><br>
         I have read the above information, and have received answers to any questions I asked. 
         I consent to take part in the study. 
@@ -183,7 +158,8 @@ const consentForm = {
       format: 'radio',
       prompt: '',
       options: ["YES, I consent to participate in this study", "NO, I do not consent to participate in this study"],
-      orientation: "vertical"
+      orientation: "vertical",
+      requirements: 'required'
     }
   ],
 
@@ -207,46 +183,58 @@ const consentForm = {
   }
 };
 
-timeline.push(consentForm);
+timeline.push(blockConsentForm);
 
 // ---------------- PAGE 3 ---------------- //
 // Define Instructions
-const instructions = {
-  type: jsPsychInstructions,
-  pages: [
+const blockInstructions = {
+  type: jsPsychSurvey,
+  custom_html: 
     `<main>
       <div class="jspsych-instructions">
         <h2>Study Instructions</h2>
         <p>Welcome! Thank you for agreeing to participate.</p> 
         <p>
-          In this study, we are interested in understanding how you think and feel about some <strong>real people</strong> from recent history.
-          You will be provided with 20 brief descriptions of these different individuals, along with a brief introduction to each person.
+          In this study, we are interested in understanding how you think and feel about some <strong>real people</strong> from modern history.
+          On each trial, you will first read a brief description of a historical figure and then answer some questions about your perceptions of them. 
         </p>
-        <p>After reading about each person, you will be asked to answer some questions about your perceptions of them. Please read each description and question carefully, and answer as honestly as possible.</p>
-        <p>When you are ready to begin, please click the "Next" button below.</p>
+        <p>
+          There will be <strong>20 trials</strong> in total. Please read each description carefully, and answer as honestly as possible.
+          After completing all trials, you will answer some additional questions before receiving a debriefing.
+        </p>
+        <p>When you are ready to begin, please click the "Next Page" button below.</p>
+        <form action="?" method="POST">
+              <div class='g-recaptcha' data-sitekey="6Lfm1TosAAAAAM5KnquJRK2lp0SZ7DANqx2j3L81"></div>
+              <br/>
+              <input type="submit" value="Submit">
+            </form>
+
+        <form action="?" method="POST">
+          <div class="g-recaptcha" data-sitekey="6Lfm1TosAAAAAM5KnquJRK2lp0SZ7DANqx2j3L81"></div>
+          <br/>
+          <input type="submit" value="Submit">
+        </form>
       </div>
     </main>`,
-  ],
-  show_clickable_nav: true
 };
 
 // Build Timeline
-timeline.push(instructions);
+timeline.push(blockInstructions);
 
 
 // ---------------- PAGE 4 ---------------- //
 const mainTaskStimuli = Object.entries(stimuli).map(([name, details]) => ({
-  name: name,
-  morality: details.morality,
+  target_name: name,
+  target_morality: details.morality,
   intro: details.intro, 
   description: details.description,
   motive: details.motive
 }));
 
-
+  
 // Assuming mainTaskStimuli is your flattened array from the previous step
-const moralPool = mainTaskStimuli.filter(s => s.morality === 'moral');
-const immoralPool = mainTaskStimuli.filter(s => s.morality === 'immoral');
+const moralPool = mainTaskStimuli.filter(s => s.target_morality === 'moral');
+const immoralPool = mainTaskStimuli.filter(s => s.target_morality === 'immoral');
 
 /**
  * Assigns a group ID (0-4) to determine the stimuli slice.
@@ -271,8 +259,8 @@ const selectedImmoral = getSlice(immoralPool, groupID);
 // Combine and shuffle for the individual participant
 const participantStimuli = jsPsych.randomization.shuffle([...selectedMoral, ...selectedImmoral]);
 
-const taskTrial = {
-  type: jsPsychSurveyHtmlForm,
+const blockNormingTrials = {
+  type: jsPsychSurvey,
   preamble: jsPsych.timelineVariable('prompt'),
   questions: [
     {
@@ -280,44 +268,44 @@ const taskTrial = {
       name: "morality",
       prompt: "How <strong>morally good or morally bad</strong> do you consider this person to be?",
       format: 'slider',
-      background: "minimal",
       direction: "bipolar",
       anchors: 
         {
           left: 'Extremely morally bad', 
           center: 'Neutral',
           right: 'Extremely morally good'
-        }
-      ,
+        },
       starting_value: 50,
       range: [0, 100],
-      requirements: 'request'
+      requirements: 'request',
+      color_scheme: "orange-purple"
     },
     {
       name: "familiarity",
       prompt: "How <strong>familiar</strong> are you with this person?",
       format: 'slider',
-      background: "minimal",
       direction: "unipolar",
+      color_scheme: "purple",
       anchors: 
         {
-          left: 'Extremely unfamiliar',
+          left: 'Not at all familiar',
           right: 'Extremely familiar'
         }
       ,
       starting_value: 0,
       range: [0, 100],
-      requirements: 'request'
+      requirements: 'request',
+      color_scheme: "purple"
     },
     {
       name: "uncertainty",
       prompt: "How <strong>certain</strong> are you about what you will read next about this person?",
       format: 'slider',
-      background: "minimal",
       direction: "unipolar",
+      color_scheme: "purple",
       anchors: 
         {
-          left: 'Extremely uncertain',
+          left: 'Not at all certain',
           right: 'Extremely certain'
         }
       ,
@@ -329,11 +317,11 @@ const taskTrial = {
       name: "typicality",
       prompt: "How <strong>typical</strong> do you consider this person to be?",
       format: 'slider',
-      background: "minimal",
       direction: "unipolar",
+      color_scheme: "purple",
       anchors: 
         {
-          left: 'Extremely atypical',
+          left: 'Not at all typical',
           right: 'Extremely typical'
         }
       ,
@@ -345,8 +333,8 @@ const taskTrial = {
       name: "valence",
       prompt: "How <strong>positively or negatively</strong> do you feel about this person?",
       format: 'slider',
-      background: "minimal",
       direction: "bipolar",
+      color_scheme: "orange-purple",
       anchors: 
         {
           left: 'Extremely negative', 
@@ -359,37 +347,50 @@ const taskTrial = {
     },
   ],
   button_label: 'Next Page',
+  data: {
+    target_name: jsPsych.timelineVariable('target_name'),
+    target_morality: jsPsych.timelineVariable('target_morality')
+  },
   on_finish: function(data) {
-    console.log(data)
+    // Now you access it from data directly, not the timeline variable
+    data.target_name = data.target_name;
+    data.target_morality = data.target_morality;
+    
+    data.morality = data.response['morality'];
+    data.familiarity = data.response['familiarity'];
+    data.uncertainty = data.response['uncertainty'];
+    data.typicality = data.response['typicality'];
+    data.valence = data.response['valence'];
   }
 };
 
-const taskProcedure = {
-  timeline: [taskTrial],
+const blockNormingProcedure = {
+  timeline: [blockNormingTrials],
   timeline_variables: participantStimuli.map(stimulus => ({
     prompt: `
-    <p>Please read about the person below and answer the following questions:</p>
-    <div class="norming-card aat-card active ${stimulus.morality === 'moral' ? 'norming-card-moral' : 'norming-card-immoral'}">
-        <div style="padding: 0 20px 0;">  
-          <h2><strong>${stimulus.name}</strong></h2>
-          <p>${stimulus.intro}</p>
-        </div>
-        <div class="faded-text">
-          <p>${stimulus.description}</p>
-          <p>${stimulus.motive}</p>
-        </div>
-      </div>`,
-    name: stimulus.name
+      <p>Please read about the person below and answer the following questions:</p>
+      <div class="norming-card aat-card active ${stimulus.target_morality === 'moral' ? 'norming-card-moral' : 'norming-card-immoral'}">
+          <div style="padding: 0 20px 0;">  
+            <h2><strong>${stimulus.target_name}</strong></h2>
+            <p>${stimulus.intro}</p>
+          </div>
+          <div class="faded-text">
+            <p>${stimulus.description}</p>
+            <p>${stimulus.motive}</p>
+          </div>
+        </div>`,
+    target_name: stimulus.target_name,
+    target_morality: stimulus.target_morality
   })),
   randomize_order: true
 };
 
-timeline.push(taskProcedure);
+timeline.push(blockNormingProcedure);
 
 // ---------------- PAGE 5 ---------------- //
 // DEMOGRAPHICS
-const fictionQuestion = {
-  type: jsPsychSurveyHtmlForm,
+const blockFictionQuestion = {
+  type: jsPsychSurvey,
   preamble: `<p class="jspsych-survey-multi-choice-preamble">
       Using the scales provided, please respond to each question about you as an individual:
     </p>`,
@@ -399,7 +400,6 @@ const fictionQuestion = {
       name: 'fiction_consumption',
       format: 'radio',
       orientation: 'horizontal',
-      write_in: [],
       options: [
         "1<br>None",
         "2",
@@ -418,13 +418,13 @@ const fictionQuestion = {
     data.education = resp['education'] || '';
   }
 };
-timeline.push(fictionQuestion);
+timeline.push(blockFictionQuestion);
 
 
 // ---------------- PAGE 6 ---------------- //
 // DEMOGRAPHICS
-const demographicsQuestions = {
-  type: jsPsychSurveyHtmlForm,
+const blockDemographicsQuestions = {
+  type: jsPsychSurvey,
   preamble: `<p class="jspsych-survey-multi-choice-preamble">
       Using the scales provided, please respond to each question about you as an individual:
     </p>`,
@@ -456,6 +456,7 @@ const demographicsQuestions = {
       prompt: "Where would you place yourself on the political spectrum, overall?",
       name: 'politics',
       format: 'slider',
+      color_scheme: "blue-red",
       anchors: 
         {
           left: 'Left-wing<br>(Liberal)', 
@@ -478,10 +479,10 @@ const demographicsQuestions = {
         "Asian or Asian-American",
         "Indigenous American or Alaskan Native",
         "Native Hawaiian or other Pacific Islander",
-        "Other", 
+        "Other:", 
         "Prefer not to disclose"
       ],
-      write_in: [],
+      write_in: ["Other:"],
       selection: 'multiple',
       orientation: 'vertical',
       requirements: 'request'
@@ -496,7 +497,6 @@ const demographicsQuestions = {
         "Moderately religious",
         "Very religious"
       ],
-      write_in: [],
       orientation: 'horizontal',
       requirements: 'request'
     }
@@ -515,14 +515,42 @@ const demographicsQuestions = {
   }
 };
 
-timeline.push(demographicsQuestions);
+timeline.push(blockDemographicsQuestions);
 
-const attention = {
-  type: jsPsychSurveyHtmlForm,
-  preamble: null,
+const blockAttention = {
+  type: jsPsychSurvey,
+  preamble: `
+      <h2 style="text-align: center"><strong>Study Debriefing</strong></h2>
+      <h3><i class="fa fa-2xs fa-chevron-circle-down"></i>&nbsp;<strong>What was this study about?</strong></h3>
+      <p class="indented align-left">
+        Our research lab is broadly interested in moral psychology—that is, better understanding the ways that moral judgments, moral states, and moral values, alongside other states, influence cognition and memory. Below are some of the specific questions we are currently exploring:
+      </p>
+      <ul>
+        <li>How do moral states influence judgments, decision-making, and broader cognition?</li>
+        <li>Do moral judgments and blame affect judgments, cognition, and memory?</li>
+        <li>How does moral information influence the extent to which rules and rule-breakers should be punished?</li>
+      </ul>
+      <p class="indented align-left">
+        Your participation helps us answer these questions, which in turn has implications for public figures, policy, and law. We are committed to sharing our research findings in ways that are accessible and relevant to the public.
+      </p>
+      <h3><i class="fa fa-2xs fa-chevron-circle-down"></i>&nbsp;<strong>How to contact us</strong></h3>
+      <p class="indented align-left">
+      Feel free to visit our website (https://www.jordancwylie.com/) to learn more about our research. If you have any concerns or questions about the study you just completed, please reach out to the lab (jordan.wylie@cornell.edu).
+      </p>
+      <h3><i class="fa fa-2xs fa-chevron-circle-down"></i>&nbsp;<strong>To learn more about your rights as a research participant</strong></h3>
+      <p class="indented align-left">
+        If you have any concerns about research-related ethics or harm, or would like to learn more about the ethical constraints under which this study was conducted, 
+        please contact the Cornell University Institutional Review Board (IRB) for Human Participants (+1 (607) 255-6182) or access their website (https://researchservices.cornell.edu/offices/IRB). Thank you for your participation!
+      </p>
+      
+      <p class="indented align-left">
+        Do you feel that you paid attention, avoided distractions, and took this survey seriously?
+      </p>
+    `,
   questions: [
     {
       prompt: `
+        <hr>
         We appreciate your response to this question. Please be honest when answering, as your answer WILL NOT affect your payment or eligibility for future studies.
         <br><br>
         <strong>Overall, how much attention did you pay to this study while you were taking it?</strong>
@@ -567,17 +595,18 @@ const attention = {
         data.attention_num = 7;
         break;
     }
-    data.attention = data.response['attention']; 
+    data.attention = data.response['attention'];
   }
 };
 
-timeline.push(attention);
+timeline.push(blockAttention);
 
 // Comments
-const feedback = {
-  type: jsPsychSurveyText,
+const blockFeedback = {
+  type: jsPsychSurvey,
   questions: [
     {
+      format: "essay",
       name: 'feedback',
       prompt:
         `<p class="jspsych-survey-multi-choice-question">
@@ -586,7 +615,8 @@ const feedback = {
             We read everything and appreciate your feedback!
           </span>
         </p>`,
-      rows: 10
+      rows: 10,
+      columns: 40
     }
   ],
   on_finish: function (data) {
@@ -594,8 +624,10 @@ const feedback = {
   }
 }
 
-timeline.push(feedback);
+timeline.push(blockFeedback);
 
+
+// ---------------- END EXPERIMENT ---------------- //
 // Exit fullscreen
 const exitFullscreen = {
   type: jsPsychFullscreen,
@@ -606,7 +638,7 @@ const exitFullscreen = {
 timeline.push(exitFullscreen);
 
 // DataPipe conclude data collection
-const save_data = {
+const blockSaveData = {
   type: jsPsychPipe,
   action: "save",
   experiment_id: "RzZhZYnwuCi2",
@@ -645,7 +677,7 @@ const save_data = {
   }
 };
 
-timeline.push(save_data);
+timeline.push(blockSaveData);
 
 startExperiment();
 
