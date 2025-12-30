@@ -203,17 +203,6 @@ const blockInstructions = {
           After completing all trials, you will answer some additional questions before receiving a debriefing.
         </p>
         <p>When you are ready to begin, please click the "Next Page" button below.</p>
-        <form action="?" method="POST">
-              <div class='g-recaptcha' data-sitekey="6Lfm1TosAAAAAM5KnquJRK2lp0SZ7DANqx2j3L81"></div>
-              <br/>
-              <input type="submit" value="Submit">
-            </form>
-
-        <form action="?" method="POST">
-          <div class="g-recaptcha" data-sitekey="6Lfm1TosAAAAAM5KnquJRK2lp0SZ7DANqx2j3L81"></div>
-          <br/>
-          <input type="submit" value="Submit">
-        </form>
       </div>
     </main>`,
 };
