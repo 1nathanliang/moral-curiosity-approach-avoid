@@ -70,7 +70,7 @@ const blockEnterFullscreen = {
   fullscreen_mode: true,
   delay_after: 0
 };
-// timeline.push(blockEnterFullscreen)
+timeline.push(blockEnterFullscreen)
 
 // ---------------- PAGE 2 ---------------- //
 // CONSENT FORM
@@ -285,7 +285,7 @@ const blockInstructions = {
   randomize_order: false
 };
 
-// timeline.push(blockInstructions);
+timeline.push(blockInstructions);
 
 
 
@@ -501,7 +501,7 @@ const blockNorming = {
   })),
   randomize_order: true
 };
-// timeline.push(blockNorming);
+timeline.push(blockNorming);
 
 // ---------------- PAGE 5 ---------------- //
 // DEMOGRAPHICS
@@ -529,8 +529,7 @@ const blockFictionQuestion = {
     data.fiction_consumption = resp['fiction_consumption'] || '';
   }
 };
-// timeline.push(blockFictionQuestion);
-
+timeline.push(blockFictionQuestion);
 
 // ---------------- PAGE 6 ---------------- //
 // DEMOGRAPHICS
