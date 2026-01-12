@@ -1,12 +1,21 @@
 /* Import Inter from Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+:root {
+  --slider-start: #DDDDDD;
+  --slider-mid: #DDDDDD;
+  --slider-end: #785ef0;
+  --deactivated-color: #888888;
+}
 
 /* Apply Inter to all jsPsych content */
 .jspsych-display-element,
 .jspsych-btn,
 .jspsych-html-keyboard-response-stimulus,
 .jspsych-html-button-response-stimulus {
-  font-family: "Geist", sans-serif !important;
+  font-family: "Inter Tight", sans-serif !important;
 }
 
 h2 {
@@ -30,14 +39,15 @@ p {
 
 p.align-left {
   text-align: left;
+  margin-bottom: 0;
   &.indented {
     margin-left: 1em;
   }
 }
 
-
 ul {
   margin-block-start: 0em;
+  margin-block-end: 0em;
 }
 
 ul li {
@@ -53,6 +63,10 @@ a {
   padding: 2px 5px 2px;
   border-radius: 5px;
   background: #EEEEEE;
+  &:hover {
+    background-color: #DDDDDD;
+    color: black;
+  }
 }
 
 /* FULLSCREEN PLUGIN */
@@ -565,6 +579,7 @@ blockquote {
 .jspsych-survey-html-form-preamble {
   display: flex;
   flex-direction: column;
+  gap: 1em;
 }
 
 /* Write-in Options */ 
@@ -642,6 +657,32 @@ input[type="number"] {
   }
 }
 
+.comprehension-check-fail > div > label.selected{
+  background-color: #fcf5f6;
+  &:focus-within {
+    border: 2.5px solid #BB0000;
+  }
+}
+
+.comprehension-check-success > div > label.selected{
+  background-color: #f1f9f5;
+  &:focus-within {
+    border: 2.5px solid #107e3e;
+  }
+}
+
+.comprehension-check-fail > div > label.selected > span.radio-button, 
+.comprehension-check-fail > div > label.selected > span.checkbox-button {
+  border-color: #BB0000;
+  background-color: #BB0000;
+}
+
+.comprehension-check-success > div > label.selected > span.radio-button, 
+.comprehension-check-success > div > label.selected > span.checkbox-button {
+  border-color: #107e3e;
+  background-color: #107e3e;
+}
+
 .jspsych-survey-html-form-radio-option-horizontal,
 .jspsych-survey-html-form-checkbox-option-horizontal {
   display: flex;
@@ -707,7 +748,7 @@ input[type="checkbox" i] {
 }
 
 /* 2. Style the SVG container (initially hidden) */
-.checkmark-svg {
+.checkmark-svg, .x-svg {
   stroke: #fff;
   stroke-width: .125rem;
   display: none;
@@ -752,21 +793,29 @@ label.jspsych-survey-html-form-checkbox-option-vertical.selected {
 }
 
 
-
-
 .jspsych-survey-html-form-next.jspsych-btn {
   background: #0B6ED0;
   border-radius: 6px;
   color: white;
-  border: none;
+  border: 1px solid #207fde;
   cursor: pointer;
-  padding: 10px 16px;
-  transition: background-color 0.3s ease;
+  padding: 8px 12px;
+  transition: background-color 0.2s ease;
   &:hover {
     background-color: #094a9e;
+    .bounce-right-hover {
+      transform: translateX(3px);
+    }
   }
 }
-/* custom style for input[type="range] (slider) to improve alignment between positions and labels */
+
+.bounce-right-hover {
+    /* Required for transform to work correctly on an inline element */
+    display: inline-block; 
+    
+    /* Smooth transition for the transform property */
+    transition: transform 0.2s ease-out; 
+}
 
 
 .jspsych-slider:focus {
@@ -798,7 +847,7 @@ label.jspsych-survey-html-form-checkbox-option-vertical.selected {
   border: 1px solid #aaa;
 }
 
-/* Slider Track - Clicked */
+/* Slider Track: Unipolar, Clicked */
 .jspsych-slider.unipolar-clicked-purple::-webkit-slider-runnable-track {
   background: linear-gradient(to right, #DDDDDD, #785ef0);
 }
@@ -811,7 +860,7 @@ label.jspsych-survey-html-form-checkbox-option-vertical.selected {
   background: linear-gradient(to right, #DDDDDD, #785ef0);
 }
 
-
+/* Slider Track: Bipolar, Clicked */
 .jspsych-slider.bipolar-clicked-orange-purple::-webkit-slider-runnable-track {
   background: linear-gradient(to right, #fe6100, #DDDDDD 50%, #785ef0);
 }
@@ -824,17 +873,31 @@ label.jspsych-survey-html-form-checkbox-option-vertical.selected {
   background: linear-gradient(to right, #fe6100, #DDDDDD 50%, #785ef0);
 }
 
-
+/* Slider Track: Unipolar, Clicked */
 .jspsych-slider.bipolar-clicked-blue-red::-webkit-slider-runnable-track {
-/* .jspsych-slider.bipolar-clicked-blue-red::-moz-range-track,
-.jspsych-slider.bipolar-clicked-blue-red::-ms-track { */
   background: linear-gradient(to right, #003db8, #DDDDDD 50%, #e91b23);
 }
 
-/* #e3edef */
+.jspsych-slider.bipolar-clicked-blue-red::-moz-range-track {
+  background: linear-gradient(to right, #003db8, #DDDDDD 50%, #e91b23);
+}
+
+.jspsych-slider.bipolar-clicked-blue-red::-ms-track {
+  background: linear-gradient(to right, #003db8, #DDDDDD 50%, #e91b23);
+}
 
 /* thumb */
-.jspsych-slider::-webkit-slider-thumb,
+.jspsych-slider::-webkit-slider-thumb {
+  border: 1px solid #666;
+  height: 24px;
+  width: 15px;
+  border-radius: 5px;
+  background: #fff;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -9px;
+}
+
 .jspsych-slider::-moz-range-thumb {
   border: 1px solid #666;
   height: 24px;
@@ -880,7 +943,6 @@ label.jspsych-survey-html-form-checkbox-option-vertical.selected {
   text-align: right;
   flex: 1;
 }
-
 
 .incomplete {
   opacity: 0.85;
@@ -936,11 +998,11 @@ label.jspsych-survey-html-form-checkbox-option-vertical.selected {
 }
 
 .jspsych-instructions {
-  text-align: center;
+  text-align: left;
   width: 75%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   margin: 0 auto;
 }
 
@@ -981,3 +1043,23 @@ label.jspsych-survey-html-form-checkbox-option-vertical.selected {
   margin-top: 10px;
   border: 12px solid #fdfbf1;
 }
+
+.fa-triangle-exclamation {
+  color: #edb423;
+}
+
+
+
+
+.jspsych-instructions-greyed-out {
+  opacity: 0.4; /* Or use your var(--deactivated-color) */
+  filter: grayscale(100%);
+  margin-bottom: 10px;
+}
+
+.jspsych-instructions-active {
+  opacity: 1;
+  border-left: 3px solid #007bff; /* Optional: highlight the new part */
+  padding-left: 15px;
+}
+
