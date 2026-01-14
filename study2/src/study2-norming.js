@@ -10,8 +10,8 @@ import stimuli from './stimuli/norming-targets.json' with { type: 'json' }
 
 // Import FontAwesome icons
 import { library, dom } from '@fortawesome/fontawesome-svg-core'
-import { faEnvelope, faPhone, faMousePointer, faArrowUpRightFromSquare, faCircleCheck, faCircleXmark, faChevronCircleRight, faChevronCircleDown, faArrowTurnUp, faArrowRight, faCircleArrowRight, faTriangleExclamation, faArrowRightToBracket} from '@fortawesome/free-solid-svg-icons';
-library.add(faEnvelope, faPhone, faMousePointer, faArrowUpRightFromSquare, faCircleCheck, faCircleXmark, faChevronCircleRight, faChevronCircleDown, faArrowTurnUp, faArrowRight, faCircleArrowRight, faTriangleExclamation, faArrowRightToBracket);
+import { faEnvelope, faPhone, faMousePointer, faArrowUpRightFromSquare, faCircleCheck, faCircleXmark, faChevronCircleRight, faChevronCircleDown, faArrowTurnUp, faArrowRight, faCircleArrowRight, faTriangleExclamation, faArrowRightToBracket, faStopwatch} from '@fortawesome/free-solid-svg-icons';
+library.add(faEnvelope, faPhone, faMousePointer, faArrowUpRightFromSquare, faCircleCheck, faCircleXmark, faChevronCircleRight, faChevronCircleDown, faArrowTurnUp, faArrowRight, faCircleArrowRight, faTriangleExclamation, faArrowRightToBracket, faStopwatch);
 dom.watch();
 
 // Import jsPsych core and CSS
@@ -74,6 +74,9 @@ timeline.push(blockEnterFullscreen)
 
 // ---------------- PAGE 2 ---------------- //
 // CONSENT FORM
+const completionTime = 10;  // in minutes
+const compensation = 10;  // in dollars
+
 const blockConsentForm = {
   type: jsPsychWyLabSurvey,
   preamble: `
@@ -88,25 +91,25 @@ const blockConsentForm = {
       </p>
     </section>
 
-      <section>
-        <h3><i class="fa fa-2xs fa-chevron-circle-down"></i>&nbsp;<strong>What this study is about</strong></h3>
-        <p class="indented align-left">
-          The purpose of this research is to explore how people view and judge the actions of others. 
-          You will not be made aware of the full nature or purpose of the research to maintain validity of the research, 
-          but you will be fully debriefed at the end.
-        </p>
-      </section>
+    <section>
+      <h3><i class="fa fa-2xs fa-chevron-circle-down"></i>&nbsp;<strong>What this study is about</strong></h3>
+      <p class="indented align-left">
+        The purpose of this research is to explore how people view and judge the actions of others. 
+        You will not be made aware of the full nature or purpose of the research to maintain validity of the research, 
+        but you will be fully debriefed at the end.
+      </p>
+    </section>
 
-      <section>
-        <h3><i class="fa fa-2xs fa-chevron-circle-down"></i>&nbsp;<strong>What we will ask you to do</strong></h3>
-        <p class="indented align-left">
-          We will ask you to complete a study that takes approximately <strong>7 minutes</strong>. The study will include 
-          demographic questions (e.g., age, gender), brief tasks or vignettes, and questions about your thoughts, 
-          perceptions, and reactions. In some cases, you may be asked to read short stories or view images before answering questions.
-        </p>
-      </section>
+    <section>
+      <h3><i class="fa fa-2xs fa-chevron-circle-down"></i>&nbsp;<strong>What we will ask you to do</strong></h3>
+      <p class="indented align-left">
+        We will ask you to complete a study that takes approximately<span style="color: #0070e0"><i class="fa-solid fa-stopwatch"></i><strong>${completionTime} minutes</strong></span>. The study will include 
+        demographic questions (e.g., age, gender), brief tasks or vignettes, and questions about your thoughts, 
+        perceptions, and reactions. In some cases, you may be asked to read short stories or view images before answering questions.
+      </p>
+    </section>
 
-      <section>
+    <section>
       <h3><i class="fa fa-2xs fa-chevron-circle-down"></i>&nbsp;<strong>Risks and discomforts</strong></h3>
       <p class="indented align-left">
         Participants will be asked questions and encounter stimuli involving moral beliefs, which may be uncomfortable. 
@@ -115,77 +118,77 @@ const blockConsentForm = {
         in place by the researcher to secure data, there is always a risk of a potential breach of confidentiality. 
         Please tell the researchers if you believe you are harmed from your participation in the study. 
       </p>
-      </section>
+    </section>
 
-      <section>
+    <section>
       <h3><i class="fa fa-2xs fa-chevron-circle-down"></i>&nbsp;<strong>Benefits</strong></h3>
       <p class="indented align-left">
         It is hoped that this study will contribute to knowledge about how people view and make judgements about others. 
         You are not expected to directly benefit from participation in the study.
       </p>
-      </section>
+    </section>
 
-      <section>
+    <section>
       <h3><i class="fa fa-2xs fa-chevron-circle-down"></i>&nbsp;<strong>Incentives for participation</strong></h3>
       <p class="indented align-left">
-        If participating through Prolific/Cloud, you will be paid <strong>$1.05 ($9.00/hour)</strong> for your participation in the study.
+        If participating through Prolific/Cloud, you will be paid <strong>$${compensation.toFixed(2)} ($${(compensation / (completionTime / 60)).toFixed(2)}/hour)</strong> for your participation in the study.
       </p>
-      </section>
-      
-      <section>
+    </section>
+    
+    <section>
       <h3><i class="fa fa-2xs fa-chevron-circle-down"></i>&nbsp;<strong>Privacy, confidentiality, and data security</strong></h3>
       <p class="indented align-left">
         You will not be asked to provide information that could be used to identify you personally. 
         We anticipate that your participation in this survey presents no greater risk than everyday use of the Internet.<br>
       </p>
-      </section>
+    </section>
 
-      <section>
-        <h3><i class="fa fa-2xs fa-chevron-circle-down"></i>&nbsp;<strong>Sharing de-identified data collected in this research</strong></h3>
-        <p class="indented align-left">
-          De-identified data from this study may be shared with the research community 
-          at large to advance science and health. We will remove or code any personal 
-          information that could identify you before files are shared with other researchers 
-          to ensure that, by current scientific standards and known methods, no one will be 
-          able to identify you from the information we share. Despite these measures, 
-          we cannot guarantee anonymity of your personal data.
-        </p>
-      </section>
+    <section>
+      <h3><i class="fa fa-2xs fa-chevron-circle-down"></i>&nbsp;<strong>Sharing de-identified data collected in this research</strong></h3>
+      <p class="indented align-left">
+        De-identified data from this study may be shared with the research community 
+        at large to advance science and health. We will remove or code any personal 
+        information that could identify you before files are shared with other researchers 
+        to ensure that, by current scientific standards and known methods, no one will be 
+        able to identify you from the information we share. Despite these measures, 
+        we cannot guarantee anonymity of your personal data.
+      </p>
+    </section>
 
-      <section>
-        <h3><i class="fa fa-2xs fa-chevron-circle-down"></i>&nbsp;<strong>Taking part is voluntary</strong></h3>
-        <p class="indented align-left">
-          Please remember that your participation is voluntary. You may refuse to participate 
-          before the study begins, discontinue at any time, or skip any questions/procedures 
-          that may make you feel uncomfortable, with no penalty to you, and no effect on the 
-          compensation earned before withdrawing.
-        </p>
-      </section>
+    <section>
+      <h3><i class="fa fa-2xs fa-chevron-circle-down"></i>&nbsp;<strong>Taking part is voluntary</strong></h3>
+      <p class="indented align-left">
+        Please remember that your participation is voluntary. You may refuse to participate 
+        before the study begins, discontinue at any time, or skip any questions/procedures 
+        that may make you feel uncomfortable, with no penalty to you, and no effect on the 
+        compensation earned before withdrawing.
+      </p>
+    </section>
 
-      <section>
-        <h3><i class="fa fa-2xs fa-chevron-circle-down"></i>&nbsp;<strong>If you have questions</strong></h3>
-        <p class="indented align-left">
-          The main researcher conducting this study is Jordan Wylie, a professor at Cornell University. 
-          Please ask any questions you have now. If you have questions later, you may contact Professor 
-          Jordan Wylie <a href="mailto:jordan.wylie@cornell.edu"><i class="fa-solid fa-envelope fa-xs"></i>&nbsp;jordan.wylie@cornell.edu</a>&nbsp;or <a href="tel:16072554486"><i class="fa-solid fa-phone fa-xs"></i>&nbsp;+1&nbsp;(607)&nbsp;255-4486</a>. If you have any questions or concerns regarding 
-          our rights as a subject in this study, you may contact the Institutional Review Board (IRB) for 
-          Human Participants <a href="tel:16072556182"><i class="fa-solid fa-phone fa-xs"></i>&nbsp;+1&nbsp;(607)&nbsp;255-6182</a> or access their 
-          website <a href="https://researchservices.cornell.edu/offices/IRB" rel="noopener" target="_blank">https://researchservices.cornell.edu/offices/IRB&nbsp;<i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a>. 
-          You may also report your concerns or complaints anonymously online via 
-          NAVEX <a href="http://www.hotline.cornell.edu" rel="noopener" target="_blank"><i class="fa-solid fa-envelope fa-xs"></i>&nbsp;www.hotline.cornell.edu</a>
-          or by calling toll free <a href="tel:18662933077"><i class="fa-solid fa-phone fa-xs"></i>&nbsp;+1&nbsp;(866)&nbsp;293-3077</a>. NAVEX is an independent organization
-            that serves as a liaison between the University and the person bringing the complaint 
-            so that anonymity can be ensured.
-        </p>
-      </section>
-      
-      <section>
+    <section>
+      <h3><i class="fa fa-2xs fa-chevron-circle-down"></i>&nbsp;<strong>If you have questions</strong></h3>
+      <p class="indented align-left">
+        The main researcher conducting this study is Jordan Wylie, a professor at Cornell University. 
+        Please ask any questions you have now. If you have questions later, you may contact Professor 
+        Jordan Wylie <a href="mailto:jordan.wylie@cornell.edu"><i class="fa-solid fa-envelope fa-xs"></i>&nbsp;jordan.wylie@cornell.edu</a>&nbsp;or <a href="tel:16072554486"><i class="fa-solid fa-phone fa-xs"></i>&nbsp;+1&nbsp;(607)&nbsp;255-4486</a>. If you have any questions or concerns regarding 
+        our rights as a subject in this study, you may contact the Institutional Review Board (IRB) for 
+        Human Participants <a href="tel:16072556182"><i class="fa-solid fa-phone fa-xs"></i>&nbsp;+1&nbsp;(607)&nbsp;255-6182</a> or access their 
+        website <a href="https://researchservices.cornell.edu/offices/IRB" rel="noopener" target="_blank">researchservices.cornell.edu/offices/IRB&nbsp;<i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a>. 
+        You may also report your concerns or complaints anonymously online via 
+        NAVEX <a href="http://www.hotline.cornell.edu" rel="noopener" target="_blank">hotline.cornell.edu&nbsp;<i class="fa-solid fa-external-link fa-xs"></i></a>
+        or by calling toll free <a href="tel:18662933077"><i class="fa-solid fa-phone fa-xs"></i>&nbsp;+1&nbsp;(866)&nbsp;293-3077</a>. NAVEX is an independent organization
+          that serves as a liaison between the University and the person bringing the complaint 
+          so that anonymity can be ensured.
+      </p>
+    </section>
+    
+    <section>
       <p class="indented align-left" style="border-top: 1px solid #ccc; padding-top: 10px; margin-top: 10px;">
         <strong>Statement of consent</strong><br>
         I have read the above information, and have received answers to any questions I asked. 
         I consent to take part in the study. 
       </p>
-      </section>`,
+    </section>`,
   questions: [
     { 
       name: 'consent',
@@ -225,23 +228,25 @@ timeline.push(blockConsentForm);
 // ---------------- PAGE 3 ---------------- //
 const instruction_pages = [
   // 1. Introduction
-  `<p class="align-left">Welcome! Thank you for agreeing to participate 🙂</p>
-  </br>
+  `<p class="align-left" style="margin-bottom: 1em;">Welcome! Thank you for agreeing to participate 🙂</p>
+  
+  <p class="align-left" style="margin-bottom: 1em;">
+    In this study, we are interested in understanding how you think and feel about some <strong>real people</strong> from global pre-modern history through the present day.
+  </p>
+
   <p class="align-left">
-    In this study, we are interested in understanding how you think and feel about some <strong>real people</strong> from modern history.
-    On each trial, you will first read a brief description of a historical figure and then answer five questions about your perceptions of each. 
+    On each trial, you will first read a brief description of someone and then answer <strong>5</strong> questions about your perceptions of each. 
+    Some of the text is intentionally faded out, so please try your best to answer based on what you are able to read.
   </p>`,
 
   // 2. Source Credibility
   `<p class="align-left">
-    We carefully selected examples of <strong>real</strong>, <strong>relatively unknown</strong> people with credible historical information 
-    collected from reliable primary and secondary online sources.
+    We selected people who are <strong>real but relatively unknown</strong> using information collected from primary and secondary sources.
   </p>`,
 
   // 3. Study Design
   `<p class="align-left">
-    There will be <strong>20 trials</strong> in total, so 20 people to evaluate. Please read each description carefully, and answer as honestly as possible.
-    After completing all trials, you will answer some additional questions before receiving a debriefing.
+    You will be asked to answer questions about a total of <strong>20 people.</strong> Please read each description carefully, and answer as honestly as possible.
   </p>`,
 
   // 4. Advance
@@ -335,36 +340,30 @@ timeline.push(blockInstructions);
 
 // ---------------- PAGE 5 ---------------- //
 // NORMING TASK
-const mainTaskStimuli = Object.entries(stimuli).map(([name, details]) => ({
-  target_name: name,
-  target_morality: details.morality,
-  intro: details.intro, 
-  description: details.description,
-  motive: details.motive
-}));
+const mainTaskStimuli = stimuli
 
-const moralPool = mainTaskStimuli.filter(s => s.target_morality === 'moral');
-const immoralPool = mainTaskStimuli.filter(s => s.target_morality === 'immoral');
+const moralPool = mainTaskStimuli.filter(s => s.morality === 'moral');
+const immoralPool = mainTaskStimuli.filter(s => s.morality === 'immoral');
 
-/**
- * Assigns a group ID (0-4) to determine the stimuli slice.
- * Ideally, this comes from a database or a URL parameter like ?group=0
- */
-const groupID = Math.floor(Math.random() * 5); 
+// /**
+//  * Assigns a group ID (0-4) to determine the stimuli slice.
+//  * Ideally, this comes from a database or a URL parameter like ?group=0
+//  */
+// const groupID = Math.floor(Math.random() * 5); 
 
-function getSlice(n, pool, group) {
-    // Each group starts at a specific index and takes 10 items
-    // Using modulo (%) allows the selection to "wrap around" the 25-item array
-    let selected = [];
-    for (let trial_idx = 0; trial_idx < n; trial_idx++) {
-        let index = (group * 5 + trial_idx) % pool.length;
-        selected.push(pool[index]);
-    }
-    return selected;
-}
+// function getSlice(n, pool, group) {
+//     // Each group starts at a specific index and takes 10 items
+//     // Using modulo (%) allows the selection to "wrap around" the 25-item array
+//     let selected = [];
+//     for (let trial_idx = 0; trial_idx < n; trial_idx++) {
+//         let index = (group * 5 + trial_idx) % pool.length;
+//         selected.push(pool[index]);
+//     }
+//     return selected;
+// }
 
-const selectedMoral = getSlice(2, moralPool, groupID);
-const selectedImmoral = getSlice(2, immoralPool, groupID);
+const selectedMoral = jsPsych.randomization.sampleWithoutReplacement(moralPool, 10);
+const selectedImmoral = jsPsych.randomization.sampleWithoutReplacement(immoralPool, 10);
 
 // Combine and shuffle for the individual participant
 const participantStimuli = jsPsych.randomization.shuffle([...selectedMoral, ...selectedImmoral]);
@@ -460,18 +459,14 @@ const pageNorming = {
   ],
   button_label: 'Next Page',
   data: {
-    target_name: jsPsych.timelineVariable('target_name'),
-    target_morality: jsPsych.timelineVariable('target_morality')
+    stimulus_name: jsPsych.timelineVariable('target_name'),
+    stimulus_morality: jsPsych.timelineVariable('target_morality')
   },
   on_finish: function(data) {
     norming_trial_count++;
     data.norming_trial_number = norming_trial_count;
-
-    // Now you access it from data directly, not the timeline variable
-    console.log(data);
-    console.log(data.target_name);
-    data.target_name = data.target_name;
-    data.target_morality = data.target_morality;
+    data.target_name = data.stimulus_name;
+    data.target_morality = data.stimulus_morality;
     
     data.morality = data.response['morality'];
     data.familiarity = data.response['familiarity'];
@@ -486,9 +481,9 @@ const blockNorming = {
   timeline_variables: participantStimuli.map(stimulus => ({
     prompt: `
       <p>Please read about the person below and answer the following questions:</p>
-      <div class="norming-card aat-card active ${stimulus.target_morality === 'moral' ? 'norming-card-moral' : 'norming-card-immoral'}">
+      <div class="norming-card aat-card active ${stimulus.morality === 'moral' ? 'norming-card-moral' : 'norming-card-immoral'}">
         <div style="padding: 0 20px 0;">  
-          <h2><strong>${stimulus.target_name}</strong></h2>
+          <h2><strong>${stimulus.name}</strong></h2>
           <p>${stimulus.intro}</p>
         </div>
         <div class="faded-text">
@@ -496,8 +491,8 @@ const blockNorming = {
           <p>${stimulus.motive}</p>
         </div>
       </div>`,
-    target_name: stimulus.target_name,
-    target_morality: stimulus.target_morality
+    target_name: stimulus.name,
+    target_morality: stimulus.morality
   })),
   randomize_order: true
 };
@@ -632,43 +627,10 @@ timeline.push(blockDemographicsQuestions);
 
 const blockAttention = {
   type: jsPsychWyLabSurvey,
-  preamble: `
-    <section>
-    <h2 style="text-align: center"><strong>Study Debriefing</strong></h2>
-    <h3><i class="fa fa-2xs fa-chevron-circle-down"></i>&nbsp;<strong>What was this study about?</strong></h3>
-    <p class="indented align-left">
-      Our research lab is broadly interested in moral psychology—that is, better understanding the ways that moral judgments, moral states, and moral values, alongside other states, influence cognition and memory. Below are some of the specific questions we are currently exploring:
-    </p>
-    </section>
-    <section>
-    <ul>
-      <li>How do moral states influence judgments, decision-making, and broader cognition?</li>
-      <li>Do moral judgments and blame affect judgments, cognition, and memory?</li>
-      <li>How does moral information influence the extent to which rules and rule-breakers should be punished?</li>
-    </ul>
-    </section>
-    <section>
-    <p class="indented align-left">
-      Your participation helps us answer these questions, which in turn has implications for public figures, policy, and law. We are committed to sharing our research findings in ways that are accessible and relevant to the public.
-    </p>
-    </section>
-    <section>
-    <h3><i class="fa fa-2xs fa-chevron-circle-down"></i>&nbsp;<strong>How to contact us</strong></h3>
-    <p class="indented align-left">
-      Feel free to visit our website <a href="https://www.jordancwylie.com/"><i class="fa-solid fa-mouse-pointer fa-xs"></i>&nbsp;jordancwylie.com</a> to learn more about our research. If you have any concerns or questions about the study you just completed, please reach out to the lab <a href="mailto:jordan.wylie@cornell.edu"><i class="fa-solid fa-envelope fa-xs"></i>&nbsp;jordan.wylie@cornell.edu</a>.
-    </p>
-    </section>
-    <section>
-    <h3><i class="fa fa-2xs fa-chevron-circle-down"></i>&nbsp;<strong>To learn more about your rights as a research participant</strong></h3>
-    <p class="indented align-left">
-      If you have any concerns about research-related ethics or harm, or would like to learn more about the ethical constraints under which this study was conducted, 
-      please contact the Cornell University Institutional Review Board (IRB) for Human Participants <a href="tel:16072556182"><i class="fa-solid fa-phone fa-xs"></i>&nbsp;+1&nbsp;(607)&nbsp;255-6182</a> or access their website <a href="https://researchservices.cornell.edu/offices/IRB"><i class="fa-solid fa-mouse-pointer fa-xs"></i>&nbsp;researchservices.cornell.edu/offices/IRB</a>. Thank you for your participation!
-    </p>
-    </section>`,
+  preamble: ``,
   questions: [
     {
       prompt: `
-        <hr>
         We appreciate your response to this question. Please be honest when answering, as your answer WILL NOT affect your payment or eligibility for future studies.
         <br><br>
         <strong>Overall, how much attention did you pay to this study while you were taking it?</strong>
@@ -680,9 +642,59 @@ const blockAttention = {
         mc_orientation: 'horizontal'
       },
       requirements: { type: 'request' }
-    }
+    },
   ],
-  request_response: true,
+  button_label: 'Next Page',
+  on_finish: function(data) {
+    jsPsych.data.addProperties({
+      age: data.response['age'],
+      gender: data.response['gender'],
+      gender_writein: data.response['gender-writein'] || '',
+      politics: data.response['politics'],
+      race_ethnicity: Array.isArray(data.response['race-ethnicity']) ? data.response['race-ethnicity'].join(", ") : data.response['race-ethnicity'],
+      religion: data.response['religion']
+    });
+  }
+}
+timeline.push(blockAttention);
+  
+
+const blockDebrief = {
+  type: jsPsychWyLabSurvey,
+  preamble: `
+    <section>
+      <h2 style="text-align: center"><strong>Study Debriefing</strong></h2>
+      <h3><i class="fa fa-2xs fa-chevron-circle-down"></i>&nbsp;<strong>What was this study about?</strong></h3>
+      <p class="indented align-left">
+        Our research lab is broadly interested in moral psychology—that is, better understanding the ways that moral judgments, moral states, and moral values, alongside other states, influence cognition and memory. Below are some of the specific questions we are currently exploring:
+      </p>
+    </section>
+    <section>
+      <ul>
+        <li>How do moral states influence judgments, decision-making, and broader cognition?</li>
+        <li>Do moral judgments and blame affect judgments, cognition, and memory?</li>
+        <li>How does moral information influence the extent to which rules and rule-breakers should be punished?</li>
+      </ul>
+    </section>
+    <section>
+      <p class="indented align-left">
+        Your participation helps us answer these questions, which in turn has implications for public figures, policy, and law. We are committed to sharing our research findings in ways that are accessible and relevant to the public.
+      </p>
+    </section>
+    <section>
+      <h3><i class="fa fa-2xs fa-chevron-circle-down"></i>&nbsp;<strong>How to contact us</strong></h3>
+      <p class="indented align-left">
+        Feel free to visit our website <a href="https://www.jordancwylie.com/" target="_blank">jordancwylie.com&nbsp;<i class="fa-solid fa-external-link fa-xs"></i></a> to learn more about our research. If you have any concerns or questions about the study you just completed, please reach out to the lab <a href="mailto:jordan.wylie@cornell.edu"><i class="fa-solid fa-envelope fa-xs"></i>&nbsp;jordan.wylie@cornell.edu</a>.
+      </p>
+    </section>
+    <section>
+      <h3><i class="fa fa-2xs fa-chevron-circle-down"></i>&nbsp;<strong>To learn more about your rights as a research participant</strong></h3>
+      <p class="indented align-left">
+        If you have any concerns about research-related ethics or harm, or would like to learn more about the ethical constraints under which this study was conducted, 
+        please contact the Cornell University Institutional Review Board (IRB) for Human Participants <a href="tel:16072556182"><i class="fa-solid fa-phone fa-xs"></i>&nbsp;+1&nbsp;(607)&nbsp;255-6182</a> or access their website <a href="https://researchservices.cornell.edu/offices/IRB" target="_blank">researchservices.cornell.edu/offices/IRB&nbsp;<i class="fa-solid fa-external-link fa-xs"></i></a>. Thank you for your participation!
+      </p>
+    </section>`,
+  questions: [],
   on_finish: function (data) {
     switch (data.response['attention']) {
       case "1<br>Not at all":
@@ -710,7 +722,7 @@ const blockAttention = {
     data.attention = data.response['attention'];
   }
 };
-timeline.push(blockAttention);
+timeline.push(blockDebrief);
 
 // ---------------- PAGE 7 ---------------- //
 // COMMENTS AND FEEDBACK

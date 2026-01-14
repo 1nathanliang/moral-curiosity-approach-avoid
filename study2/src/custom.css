@@ -601,7 +601,7 @@ textarea {
   width: 100%;
   box-sizing: border-box;
   border-radius: 5px;
-  font-family: 'Geist', sans-serif !important;
+  font-family: 'Inter Tight', sans-serif !important;
 }
 
 /* Slider Options */
@@ -888,14 +888,23 @@ label.jspsych-survey-html-form-checkbox-option-vertical.selected {
 
 /* thumb */
 .jspsych-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
   border: 1px solid #666;
   height: 24px;
   width: 15px;
   border-radius: 5px;
-  background: #fff;
   cursor: pointer;
-  -webkit-appearance: none;
   margin-top: -9px;
+
+  /* background: 
+    repeating-linear-gradient(
+      0deg,
+      #999,
+      #999 1px,
+      transparent 1px,
+      transparent 4px
+    ) no-repeat 50% 50% / 60% 9px, 
+    #fff; */
 }
 
 .jspsych-slider::-moz-range-thumb {
@@ -905,7 +914,7 @@ label.jspsych-survey-html-form-checkbox-option-vertical.selected {
   border-radius: 5px;
   background: #fff;
   cursor: pointer;
-  -webkit-appearance: none;
+  appearance: none;
   margin-top: -9px;
 }
 
